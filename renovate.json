@@ -8,9 +8,7 @@
       "matchPackageNames": [
         "docker.io/library/postgres"
       ],
-      "allowedVersions": [
-        "<=16"
-      ],
+      "allowedVersions": "<=16",
       "automerge": true,
       "automergeType": "pr",
       "platformAutomerge": true
