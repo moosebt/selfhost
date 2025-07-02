@@ -1,0 +1,88 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": [
+        "docker.io/library/postgres"
+      ],
+      "allowedVersions": "<=16",
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true
+    },
+    {
+      "matchPackageNames": [
+        "docker.io/library/redis"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/goauthentik/server"
+      ],
+      "matchUpdateTypes": [
+        "patch"
+      ],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/goauthentik/server"
+      ],
+      "matchUpdateTypes": [
+        "minor"
+      ],
+      "automerge": false,
+      "assignees": [
+        "@me"
+      ]
+    },
+    {
+      "matchPackageNames": [
+        "ghcr.io/goauthentik/server"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "automerge": false,
+      "assignees": [
+        "@me"
+      ],
+      "labels": [
+        "breaking-change"
+      ]
+    }
+  ],
+  "schedule": [
+    "before 4am on monday"
+  ],
+  "timezone": "UTC",
+  "labels": [
+    "dependencies",
+    "docker"
+  ],
+  "assignees": [
+    "@me"
+  ],
+  "reviewers": [
+    "@me"
+  ],
+  "prHourlyLimit": 2,
+  "prConcurrentLimit": 5,
+  "rangeStrategy": "bump",
+  "commitMessageAction": "Update",
+  "commitMessageTopic": "{{depName}}",
+  "commitMessageExtra": "to {{newVersion}}",
+  "commitMessagePrefix": "chore(deps):"
+}
