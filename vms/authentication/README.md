@@ -1,6 +1,6 @@
-# authentik-selfhost
+# selfhosted authentication
 
-Docker Compose config for running Authentik in a homelab.
+Docker Compose config for running Authentik in my home environment.
 
 ---
 
@@ -17,8 +17,8 @@ Docker Compose config for running Authentik in a homelab.
 Clone the repository:
 
 ```bash
-git clone https://github.com/<your-username>/authentik-selfhost.git
-cd authentik-selfhost
+git clone https://github.com/moosebt/selfhost.git
+cd selfhost/vms/authentication
 ```
 
 Create required secrets:
