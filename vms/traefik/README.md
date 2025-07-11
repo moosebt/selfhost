@@ -69,7 +69,7 @@ echo "your@email.com" > secrets/CF_API_EMAIL.txt
 echo "your-cloudflare-api-token" > secrets/CF_DNS_API_TOKEN.txt
 ```
 
-**Cloudflare API Token Requirements:**
+**Cloudflare API Permissions:**
 - Zone:Zone:Read
 - Zone:DNS:Edit
 
