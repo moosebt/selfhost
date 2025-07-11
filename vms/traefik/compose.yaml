@@ -1,4 +1,6 @@
 ---
+name: traefik
+
 services:
   traefik:
     image: traefik:v3.4.1
@@ -6,8 +8,6 @@ services:
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped
-    env_file:
-      - .env
     ports:
       - ${HTTP_PORT}:${HTTP_PORT}
       - ${HTTPS_PORT}:${HTTPS_PORT}
@@ -15,10 +15,10 @@ services:
       - proxy
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ./config/traefik/acme/acme.json:/acme/acme.json
-      - ./config/traefik/logs:/var/log/traefik
-      - ./config/traefik/dynamic:/etc/traefik/dynamic:ro
-      - ./config/traefik/traefik.yaml:/etc/traefik/traefik.yaml:ro
+      - ${CONFIG_DIR}/traefik/acme/acme.json:/acme/acme.json
+      - ${CONFIG_DIR}/traefik/logs:/var/log/traefik
+      - ${CONFIG_DIR}/traefik/dynamic:/etc/traefik/dynamic:ro
+      - ${CONFIG_DIR}/traefik/traefik.yaml:/etc/traefik/traefik.yaml:ro
     secrets:
       - CF_API_EMAIL
       - CF_DNS_API_TOKEN
@@ -26,15 +26,15 @@ services:
       - CF_API_EMAIL=file:///run/secrets/CF_API_EMAIL
       - CF_DNS_API_TOKEN=file:///run/secrets/CF_DNS_API_TOKEN
     labels:
-      # Enable dashboard on traefik.ooselab.com
-      - "traefik.enable=true"
-      - "traefik.http.routers.traefik.rule=Host(`traefik.${DOMAIN}`)"
-      - "traefik.http.routers.traefik.entrypoints=websecure"
-      - "traefik.http.routers.traefik.service=api@internal"
-      - "traefik.http.routers.traefik.tls=true"
-      - "traefik.http.routers.traefik.tls.certresolver=myresolver"
-      - "traefik.http.routers.traefik.middlewares=authentik@file"
-      - "traefik.http.routers.traefik.priority=100"
+      # Enable dashboard on traefik.${DOMAIN}
+      - traefik.enable=true
+      - traefik.http.routers.traefik.rule=Host(`traefik.${DOMAIN}`)
+      - traefik.http.routers.traefik.entrypoints=websecure
+      - traefik.http.routers.traefik.service=api@internal
+      - traefik.http.routers.traefik.tls=true
+      - traefik.http.routers.traefik.tls.certresolver=myresolver
+      - traefik.http.routers.traefik.middlewares=authentik@file
+      - traefik.http.routers.traefik.priority=100
 
 networks:
   proxy:
