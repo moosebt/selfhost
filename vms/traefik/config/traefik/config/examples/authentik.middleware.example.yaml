@@ -1,4 +1,4 @@
-# --> (Example) Securely expose apps using the Traefik proxy outpost...
+# (Example) Securely expose apps using the Traefik proxy outpost...
 # http:
 #   middlewares:
 #     authentik-middleware:
@@ -17,4 +17,4 @@
 #           - X-authentik-meta-provider
 #           - X-authentik-meta-app
 #           - X-authentik-meta-version
-# <--
+#
