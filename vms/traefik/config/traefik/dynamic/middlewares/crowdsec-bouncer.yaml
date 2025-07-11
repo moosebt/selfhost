@@ -1,0 +1,10 @@
+---
+http:
+  middlewares:
+    crowdsec:
+      plugin:
+        bouncer:
+          enabled: true
+          crowdsecLapiKey: ${CROWDSEC_LAPI_KEY}
+          crowdsecLapiScheme: http
+          crowdSecLapiHost: crowdsec:8080

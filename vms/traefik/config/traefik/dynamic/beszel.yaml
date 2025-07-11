@@ -1,0 +1,12 @@
+---
+http:
+  routers:
+    beszel: 
+      rule: Host(`beszel.${DOMAIN}`)
+      service: beszel 
+      tls: {}
+  services:
+    beszel:
+      loadBalancer:
+        servers:
+          - url: http://monitoring:8090

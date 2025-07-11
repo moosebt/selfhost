@@ -1,0 +1,14 @@
+---
+http:
+  routers:
+    bazarr: 
+      rule: Host(`bazarr.${DOMAIN}`)
+      service: bazarr 
+      tls: {}
+      middlewares:
+        - authentik@file
+  services:
+    bazarr:
+      loadBalancer:
+        servers:
+          - url: http://bazarr:6767

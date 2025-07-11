@@ -1,0 +1,10 @@
+---
+http:
+  middlewares:
+    convos-headers:
+      headers:
+        customRequestHeaders:
+          X-Request-Base: https://convos.${DOMAIN}/
+          forwardedHeaders:
+            insecure: true
+            X-Forwarded-Proto: https

@@ -1,0 +1,13 @@
+---
+http:
+  routers:
+    authentik:
+      rule: Host(`auth.${DOMAIN}`)
+      service: authentik
+      tls: {}
+
+  services:
+    authentik:
+      loadBalancer:
+        servers:
+          - url: http://authentication:9000

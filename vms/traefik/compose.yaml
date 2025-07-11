@@ -1,0 +1,47 @@
+---
+services:
+  traefik:
+    image: traefik:v3.4.1
+    container_name: traefik
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - ${HTTP_PORT}:${HTTP_PORT}
+      - ${HTTPS_PORT}:${HTTPS_PORT}
+    networks:
+      - proxy
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./config/traefik/acme/acme.json:/acme/acme.json
+      - ./config/traefik/logs:/var/log/traefik
+      - ./config/traefik/dynamic:/etc/traefik/dynamic:ro
+      - ./config/traefik/traefik.yaml:/etc/traefik/traefik.yaml:ro
+    secrets:
+      - CF_API_EMAIL
+      - CF_DNS_API_TOKEN
+    environment:
+      - CF_API_EMAIL=file:///run/secrets/CF_API_EMAIL
+      - CF_DNS_API_TOKEN=file:///run/secrets/CF_DNS_API_TOKEN
+    labels:
+      # Enable dashboard on traefik.ooselab.com
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.${DOMAIN}`)"
+      - "traefik.http.routers.traefik.entrypoints=websecure"
+      - "traefik.http.routers.traefik.service=api@internal"
+      - "traefik.http.routers.traefik.tls=true"
+      - "traefik.http.routers.traefik.tls.certresolver=myresolver"
+      - "traefik.http.routers.traefik.middlewares=authentik@file"
+      - "traefik.http.routers.traefik.priority=100"
+
+networks:
+  proxy:
+    external: true
+
+secrets:
+  CF_API_EMAIL:
+    file: ./secrets/CF_API_EMAIL.txt
+  CF_DNS_API_TOKEN:
+    file: ./secrets/CF_DNS_API_TOKEN.txt

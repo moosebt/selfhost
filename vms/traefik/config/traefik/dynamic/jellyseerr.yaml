@@ -1,0 +1,12 @@
+---
+http:
+  routers:
+    jellyseerr:
+      rule: Host(`req.${DOMAIN}`)
+      service: jellyseerr 
+      tls: {}
+  services:
+    jellyseerr:
+      loadBalancer:
+        servers:
+          - url: http://jellyseerr:5055

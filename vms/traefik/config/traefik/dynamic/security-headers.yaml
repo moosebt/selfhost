@@ -1,0 +1,8 @@
+---
+http:
+  middlewares:
+    security-headers:
+      headers:
+        frameDeny: false 
+        browserXssFilter: true
+        accessControlAllowOriginList: 'https://p.${DOMAIN}' 

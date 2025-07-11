@@ -1,0 +1,17 @@
+---
+http:
+  routers:
+    convos:
+      entryPoints:
+        - websecure
+      rule: Host(`convos.${DOMAIN}`)
+      service: convos
+      tls: {}
+      middlewares:
+        - authentik@file
+        - convos-headers@file
+  services:
+    convos:
+      loadBalancer:
+        servers:
+          - url: http://convos:8080

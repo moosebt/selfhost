@@ -1,0 +1,14 @@
+---
+http:
+  routers:
+    bookstack:
+      rule: Host(`doc.${DOMAIN}`)
+      service: bookstack 
+      tls: {}
+      middlewares:
+        - authentik@file
+  services:
+    bookstack:
+      loadBalancer:
+        servers:
+          - url: http://control-tower:6875

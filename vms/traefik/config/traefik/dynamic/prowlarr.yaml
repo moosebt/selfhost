@@ -1,0 +1,14 @@
+---
+http:
+  routers:
+    prowlarr: 
+      rule: Host(`prowlarr.${DOMAIN}`)
+      service: prowlarr 
+      tls: {}
+      middlewares:
+        - authentik@file
+  services:
+    prowlarr:
+      loadBalancer:
+        servers:
+          - url: http://prowlarr:9696

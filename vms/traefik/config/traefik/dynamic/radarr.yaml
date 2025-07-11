@@ -1,0 +1,14 @@
+---
+http:
+  routers:
+    radarr: 
+      rule: Host(`radarr.${DOMAIN}`)
+      service: radarr 
+      tls: {}
+      middlewares:
+        - authentik@file
+  services:
+    radarr:
+      loadBalancer:
+        servers:
+          - url: http://download-stack:7878

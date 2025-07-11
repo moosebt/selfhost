@@ -1,0 +1,14 @@
+---
+http:
+  routers:
+    sonarr: 
+      rule: Host(`sonarr.${DOMAIN}`)
+      service: sonarr 
+      tls: {}
+      middlewares:
+        - authentik@file
+  services:
+    sonarr:
+      loadBalancer:
+        servers:
+          - url: http://download-stack:8989

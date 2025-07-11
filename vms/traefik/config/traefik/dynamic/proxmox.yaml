@@ -1,0 +1,17 @@
+---
+http:
+  routers:
+    proxmox:
+      entryPoints:
+        - websecure
+      rule: Host(`p.${DOMAIN}`)
+      service: proxmox
+      tls: {}
+      middlewares:
+        security-headers@file
+  services:
+    proxmox:
+      loadBalancer:
+        serversTransport: proxmox
+        servers:
+          - url: https://prox-1:8006

@@ -1,5 +1,4 @@
-## VM Overview
+## Service Overview
 
-- `authentication`: Authentik, supporting services
-- `media`: Jellyfin, Audiobookshelf, Navidrome
-- `download`: Arr stack, SABnbd, qBittorrent
+- `authentication`: Authentik
+- `traefik`: Traefik

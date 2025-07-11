@@ -1,0 +1,14 @@
+---
+http:
+  routers:
+    qbittorrent: 
+      rule: Host(`qbit.${DOMAIN}`)
+      service: qbittorrent 
+      tls: {}
+      middlewares:
+        - authentik@file
+  services:
+    qbittorrent:
+      loadBalancer:
+        servers:
+          - url: http://download-stack:8085

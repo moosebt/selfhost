@@ -1,0 +1,12 @@
+---
+http:
+  routers:
+    komodo:
+      rule: Host(`komodo.${DOMAIN}`)
+      service: komodo
+      tls: {}
+  services:
+    komodo:
+      loadBalancer:
+        servers:
+          - url: http://monitoring:9120

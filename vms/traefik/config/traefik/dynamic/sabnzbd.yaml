@@ -1,0 +1,14 @@
+---
+http:
+  routers:
+    sabnzbd: 
+      rule: Host(`sabnzbd.${DOMAIN}`)
+      service: sabnzbd 
+      tls: {}
+      middlewares:
+        - authentik@file
+  services:
+    sabnzbd:
+      loadBalancer:
+        servers:
+          - url: http://download-stack:8089

@@ -1,0 +1,23 @@
+---
+http:
+  routers:
+    warpgate: 
+      rule: Host(`warpgate.${DOMAIN}`)
+      service: warpgate 
+  services:
+    warpgate:
+      loadBalancer:
+        servers:
+         - url: https://control-tower:8888/
+tcp:
+  routers:
+    warpgate-ssh-router:
+      rule: "HostSNI(`*`)"
+      service: warpgate-ssh-service
+      entryPoints:
+        - ssh
+  services:
+    warpgate-ssh-service:
+      loadBalancer:
+        servers:
+          - address: control-tower:2222

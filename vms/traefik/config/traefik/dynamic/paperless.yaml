@@ -1,0 +1,12 @@
+---
+http:
+  routers:
+    papier:
+      rule: Host(`papier.${DOMAIN}`)
+      service: papier 
+      tls: {}
+  services:
+    papier:
+      loadBalancer:
+        servers:
+          - url: http://paperless:8000
